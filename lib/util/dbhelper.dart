@@ -22,7 +22,7 @@ class DbHelper {
   static final DbHelper _dbHelper = DbHelper._internal();
   String tblTodo = "todo";
   String colId = "id";
-  String coltitle = "title";
+  String colTitle = "title";
   String colDescription = "description";
   String colPriority = "priority";
   String colDate = "date";
@@ -91,10 +91,10 @@ class DbHelper {
   }
 
   // define _createDb method that launches an sql query to create the db.
-  _createDb(Database db, int newVersion) async {
+  void _createDb(Database db, int newVersion) async {
     await db.execute(
         // this the sql query, using $ means sql will concatinate what follows
-        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $coltitle TEXT, " +
+        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $colTitle TEXT, " +
             "$colDescription TEXT, $colPriority INTEGER, $colDate TEXT)");
   }
 }

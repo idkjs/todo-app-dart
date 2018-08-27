@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/model/todo.dart';
-import 'package:todo_app/util/dbhelpers.dart';
+import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 
+// If you never intend to change a variable, use final or const, either instead of var or in addition to a type.
+// see: https://www.dartlang.org/guides/language/language-tour#final-and-const
 class TodoDetail extends StatefulWidget {
-  // If you never intend to change a variable, use final or const, either instead of var or in addition to a type.
-  // see: https://www.dartlang.org/guides/language/language-tour#final-and-const
   final Todo todo;
   TodoDetail(this.todo);
 
   @override
-  State<StatefulWidget> createState() => TodoDetailState();
+  State<StatefulWidget> createState() => TodoDetailState(todo);
 }
 
 class TodoDetailState extends State {
   Todo todo;
+  TodoDetailState(this.todo);
+
   final _priorities = ["High", "Medium", "Low"];
   String _priority = "Low";
 
@@ -24,7 +26,7 @@ class TodoDetailState extends State {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    // if the todo contains a title or descr, we want to show it
+    // if the todo contains a t;itle or descr, we want to show it
     titleController.text = todo.title;
     descriptionController.text = todo.description;
     // set TextStyle
@@ -67,7 +69,7 @@ class TodoDetailState extends State {
               style: textStyle,
               value: "Low",
               onChanged: null,
-            )
+            ),
           ],
         ));
   }

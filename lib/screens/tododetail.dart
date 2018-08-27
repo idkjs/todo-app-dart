@@ -157,6 +157,31 @@ class TodoDetailState extends State {
     // then nav to list screen
     Navigator.pop(context, true);
   }
+
+  // helper to update the priority of a todo
+  void updatePriority(String value) {
+    switch (value) {
+      case "High":
+        todo.priority = 1;
+        break;
+      case "Medium":
+        todo.priority = 2;
+        break;
+      case "Low":
+        todo.priority = 3;
+        break;
+    }
+    // set state on _priority with the value
+    setState(() {
+      _priority = value;
+    });
+  }
+
+  // method to convert priority value int to string
+  // takes the integer of the priority as a parameter and returns the item in priorites array at the position of the passed int - 1 for zero index
+  String retrievePriority(int value) {
+    return _priorities[value - 1];
+  }
 }
 
 //         body: Padding(

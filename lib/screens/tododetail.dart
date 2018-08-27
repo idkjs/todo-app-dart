@@ -122,30 +122,43 @@ class TodoDetailState extends State {
         save();
         break;
       case mnuDelete:
-      // call route change on mnudelete
+        // call route change on mnudelete
         Navigator.pop(context, true);
         if (todo.id == null) {
           return;
         }
         result = await helper.deleteTodo(todo.id);
         // create some user feedback
-        if (result != 0){
+        if (result != 0) {
           AlertDialog alertDialog = AlertDialog(
             title: Text("Delete Todo"),
             content: Text("The Todo has been deleted"),
           );
-          showDialog(context: context,
-          builder: (_) => alertDialog);
+          showDialog(context: context, builder: (_) => alertDialog);
         }
         break;
-        // back mnu with navigation
-        case mnuBack:
+      // back mnu with navigation
+      case mnuBack:
         Navigator.pop(context, true);
         break;
       default:
     }
   }
+
+  void save() {
+    todo.date = new DateFormat.yMd().format(DateTime.now());
+    // check if id is not null, meaning checking if its a new todo, if not, update the todo by id
+    if (todo.id != null) {
+      helper.updateTodo(todo);
+    } else {
+      // if you null, have a new one
+      helper.insertTodo(todo);
+    }
+    // then nav to list screen
+    Navigator.pop(context, true);
+  }
 }
+
 //         body: Padding(
 // padding: EdgeInsets.only(top:35.0, left: 10.0, right:10.0),
 // child:Column(

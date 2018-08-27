@@ -33,6 +33,17 @@ class DbHelper {
     return _dbHelper;
   }
 
+// var that will contain the DB throughout the class. its a static Database type which we name _db
+  static Database _db;
+
+  // getter for _db
+  Future<Database> get db async {
+    if (_db == null) {
+      _db = await initializeDb();
+    }
+    return _db;
+  }
+
   // method of Future type that gets connection to db.
   // Future used to get potential value, here the db connection
   // async below imports from async package

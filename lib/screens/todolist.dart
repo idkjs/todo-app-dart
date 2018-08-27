@@ -4,7 +4,6 @@ import 'package:todo_app/util/dbhelper.dart';
 import 'package:todo_app/screens/tododetail.dart';
 
 class TodoList extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() => TodoListState();
 }
@@ -104,16 +103,9 @@ class TodoListState extends State {
       context,
       MaterialPageRoute(builder: (context) => TodoDetail(todo)),
     );
-    // if (result == true) {
-    //   getData();
-    // }
+    // after clicking delete, if that operation comes back true, call getData() to update the list or it will keep showing the old list.
+    if (result == true) {
+      getData();
+    }
   }
-  // void navigateToDetail(Todo todo) async {
-  //   bool result = await Navigator.push(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => TodoDetail(todo)),
-  //   );
-  //       if (result == true) {
-  //     getData();
-  // }
 }

@@ -3,6 +3,20 @@ import 'package:todo_app/model/todo.dart';
 import 'package:todo_app/util/dbhelper.dart';
 import 'package:intl/intl.dart';
 
+// create local instance of DbHelper
+DbHelper helper = DbHelper();
+// create [] of "" with names we want in menu button
+final List<String> choices = const <String>[
+  'Save Todo & Back',
+  'Delete Todo',
+  'Back to List'
+];
+
+// create identifiers for each string
+const mnuSave = 'Save Todo & Back';
+const mnuDelete = 'Delete Todo';
+const mnuBack = 'Back to List';
+
 // If you never intend to change a variable, use final or const, either instead of var or in addition to a type.
 // see: https://www.dartlang.org/guides/language/language-tour#final-and-const
 class TodoDetail extends StatefulWidget {
@@ -31,7 +45,7 @@ class TodoDetailState extends State {
     descriptionController.text = todo.description;
     // set TextStyle
     TextStyle textStyle = Theme.of(context).textTheme.title;
-    // return the UI
+    // return the UI using [scaffold](https://docs.flutter.io/flutter/material/Scaffold-class.html)
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

@@ -52,6 +52,7 @@ class TodoDetailState extends State {
         title: Text(todo.title),
         actions: <Widget>[
           PopupMenuButton<String>(
+            onSelected: select,
             itemBuilder: (BuildContext context) {
               return choices.map((String choice) {
                 return PopupMenuItem<String>(
@@ -111,6 +112,38 @@ class TodoDetailState extends State {
         ),
       ),
     );
+  }
+
+// check which menu item was selected by user
+  void select(String value) async {
+    int result;
+    switch (value) {
+      case mnuSave:
+        save();
+        break;
+      case mnuDelete:
+      // call route change on mnudelete
+        Navigator.pop(context, true);
+        if (todo.id == null) {
+          return;
+        }
+        result = await helper.deleteTodo(todo.id);
+        // create some user feedback
+        if (result != 0){
+          AlertDialog alertDialog = AlertDialog(
+            title: Text("Delete Todo"),
+            content: Text("The Todo has been deleted"),
+          );
+          showDialog(context: context,
+          builder: (_) => alertDialog);
+        }
+        break;
+        // back mnu with navigation
+        case mnuBack:
+        Navigator.pop(context, true);
+        break;
+      default:
+    }
   }
 }
 //         body: Padding(

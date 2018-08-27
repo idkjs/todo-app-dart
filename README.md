@@ -65,7 +65,7 @@ Note: `factory` where dartlang's factory constructor lets you override the defau
 
 ### How it works:
 
-![singleton](singleton.png)
+![singleton](assets/singleton.png)
 
 ```dart
 class DbHelper {
@@ -85,3 +85,13 @@ class DbHelper {
     }
 }
 ```
+
+## Async/Await/Futures
+
+These methods are interchangeable in dartlang.
+
+**Futures**
+![futures](assets/futures.png)
+
+**Async/Await**
+![asyncawait](assets/asyncawait.png)

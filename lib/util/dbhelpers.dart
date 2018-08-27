@@ -32,4 +32,22 @@ class DbHelper {
   factory DbHelper() {
     return _dbHelper;
   }
+
+  // method of Future type that gets connection to db.
+  // Future used to get potential value, here the db connection
+  // async below imports from async package
+  Future<Database> initializeDb() async {
+    Directory dir = await getApplicationDocumentsDirectory();
+    String path = dir.path + "todos.db";
+    var dbTodos = await openDatabase(path, version: 1, onCreate: _createDb);
+    return dbTodos;
+  }
+
+  // define _createDb method that launches an sql query to create the db.
+  _createDb(Database db, int newVersion) async {
+    await db.execute(
+        // this the sql query, using $ means sql will concatinate what follows
+        "CREATE TABLE $tblTodo($colId INTEGER PRIMARY KEY, $coltitle TEXT, " +
+            "$colDescription TEXT, $colPriority INTEGER, $colDate TEXT)");
+  }
 }

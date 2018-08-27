@@ -50,6 +50,18 @@ class TodoDetailState extends State {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(todo.title),
+        actions: <Widget>[
+          PopupMenuButton<String>(
+            itemBuilder: (BuildContext context) {
+              return choices.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          )
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.only(top: 35.0, left: 10.0, right: 10.0),

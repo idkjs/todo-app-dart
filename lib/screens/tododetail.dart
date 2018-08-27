@@ -73,6 +73,7 @@ class TodoDetailState extends State {
                 TextField(
                   controller: titleController,
                   style: textStyle,
+                  onChanged: (value) => this.updateTitle(),
                   decoration: InputDecoration(
                     labelText: "Title",
                     labelStyle: textStyle,
@@ -86,6 +87,7 @@ class TodoDetailState extends State {
                     child: TextField(
                       controller: descriptionController,
                       style: textStyle,
+                      onChanged: (value) => this.updateDescription(),
                       decoration: InputDecoration(
                         labelText: "Description",
                         labelStyle: textStyle,
@@ -103,8 +105,8 @@ class TodoDetailState extends State {
                     );
                   }).toList(),
                   style: textStyle,
-                  value: "Low",
-                  onChanged: null,
+                  value: retrievePriority(todo.priority),
+                  onChanged: (value) => updatePriority(value),
                 )),
               ],
             )
@@ -181,6 +183,16 @@ class TodoDetailState extends State {
   // takes the integer of the priority as a parameter and returns the item in priorites array at the position of the passed int - 1 for zero index
   String retrievePriority(int value) {
     return _priorities[value - 1];
+  }
+
+  // two methods to update stuff
+  // update title by taking the value from titleController.text
+  void updateTitle() {
+    todo.title = titleController.text;
+  }
+
+  void updateDescription() {
+    todo.description = descriptionController.text;
   }
 }
 

@@ -44,6 +44,42 @@ class DbHelper {
     return _db;
   }
 
+// sql CRUD queries
+  Future<int> insertTodo(Todo todo) async {
+    Database db = await this.db;
+    var result = await db.insert(tblTodo, todo.toMap());
+    return result;
+  }
+
+  Future<List> getTodos() async {
+    Database db = await this.db;
+    var result =
+        await db.rawQuery("SELECT * FROM $tblTodo order by $colPriority ASC");
+    return result;
+  }
+
+// example of using sqflite helper
+  Future<int> getCount() async {
+    Database db = await this.db;
+    var result = Sqflite
+        .firstIntValue(await db.rawQuery("select count (*) from $tblTodo"));
+    return result;
+  }
+
+  Future<int> updateTodo(Todo todo) async {
+    var db = await this.db;
+    var result = await db.update(tblTodo, todo.toMap(),
+        where: "$colId = ?", whereArgs: [todo.id]);
+    return result;
+  }
+
+  Future<int> deleteTodo(int id) async {
+    int result;
+    var db = await this.db;
+    result = await db.rawDelete('DELETE FROM $tblTodo WHERE $colId = $id');
+    return result;
+  }
+
   // method of Future type that gets connection to db.
   // Future used to get potential value, here the db connection
   // async below imports from async package

@@ -14,8 +14,45 @@ class TodoListState extends State {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    // TODO: implement build method
+    if (todos == null) {
+      todos = List<Todo>();
+      getData();
+    }
+    // ui
+    return Scaffold(
+      body: todoListItems(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: null,
+        tooltip: "Add new Todo",
+        child: new Icon(Icons.add),
+      ),
+    );
   }
+
+  ListView todoListItems() {
+    // constructed with builder property on ListView class
+    return ListView.builder(
+      itemCount: count,
+      itemBuilder: (BuildContext context, int position) {
+        return Card(
+          color: Colors.white,
+          elevation: 2.0,
+          child: ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Colors.red,
+                child: Text(this.todos[position].id.toString()),
+              ),
+              title: Text(this.todos[position].title),
+              subtitle: Text(this.todos[position].date),
+              onTap: () {
+                debugPrint("Tapped on " + this.todos[position].id.toString());
+              }),
+        );
+      },
+    );
+  }
+
   // method to retrieve data from db
   getData() {
     final dbFuture = helper.initializeDb();

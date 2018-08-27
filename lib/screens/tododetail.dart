@@ -32,7 +32,7 @@ class TodoDetailState extends State {
   TodoDetailState(this.todo);
 
   final _priorities = ["High", "Medium", "Low"];
-  String _priority = "Low";
+  String _priority;
 
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();

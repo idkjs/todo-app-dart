@@ -47,6 +47,7 @@ class TodoListState extends State {
               subtitle: Text(this.todos[position].date),
               onTap: () {
                 debugPrint("Tapped on " + this.todos[position].id.toString());
+                debugPrint("Tapped on " + this.todos[position].title);
               }),
         );
       },

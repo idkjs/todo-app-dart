@@ -43,3 +43,45 @@ dependencies:
   path_provider: any
   intl: ^0.15.7
 ```
+
+## DBHelper for accessing the sqldb
+
+Create class for db declaring our tables and columns, so String tblTodo = "todo" declars tbleTodo as string type and sets it todo which is the name or table. Same idea for columns.
+
+```dart
+ class DbHelper {
+   String tblTodo = "todo";
+   String colId = "id";
+   String coltitle = "title";
+   String colDescription = "description";
+   String colPriority = "priority";
+   String colDate = "date";
+ }
+```
+
+Since we only want this class to be called once, so we need to turn it into a singleton. Singleton restricts the instantiation of a class to one object only.
+So basically you can't call DbHelper more than once in your program. Instead of creating a new instance the factory constructor is only required to return one instance of the class.
+Note: `factory` where dartlang's factory constructor lets you override the default behaviour, which is not singleton, and use the class as a singleton.
+
+### How it works:
+
+![singleton](singleton.png)
+
+```dart
+class DbHelper {
+    <!-- create DbHelperClass called dbHelper with an underscore to mark as private -->
+    static final DbHelper _dbHelper = DbHelper._interal();
+    String tblTodo = "todo";
+    String colId = "id";
+    String coltitle = "title";
+    String colDescription = "description";
+    String colPriority = "priority";
+    String colDate = "date";
+<!-- named constructor -->
+    DbHelper._internal();
+<!-- unnamed constructor returning _dbHelper -->
+    factory DbHelper(){
+        return _dbHelper;
+    }
+}
+```

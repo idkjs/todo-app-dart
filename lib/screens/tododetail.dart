@@ -33,78 +33,85 @@ class TodoDetailState extends State {
     TextStyle textStyle = Theme.of(context).textTheme.title;
     // return the UI
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(todo.title),
-        ),
-        body: Padding(
-          padding: EdgeInsets.only(top:35.0, left: 10.0, right:10.0),
-          child:Column(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(todo.title),
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(top: 35.0, left: 10.0, right: 10.0),
+        child: ListView(
           children: <Widget>[
-            TextField(
-              controller: titleController,
-              style: textStyle,
-              decoration: InputDecoration(
-                  labelText: "Title",
-                  labelStyle: textStyle,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
+            Column(
+              children: <Widget>[
+                TextField(
+                  controller: titleController,
+                  style: textStyle,
+                  decoration: InputDecoration(
+                    labelText: "Title",
+                    labelStyle: textStyle,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
                   ),
-                  ),
-            ),
-                        Padding(
-              padding: EdgeInsets.only(top:15.0, bottom: 15.0),
-              child:TextField(
-              controller: descriptionController,
-              style: textStyle,
-              decoration: InputDecoration(
-                  labelText: "Description",
-                  labelStyle: textStyle,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  ),
-            )),
-            DropdownButton<String>(
-              items: _priorities.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              style: textStyle,
-              value: "Low",
-              onChanged: null,
-            ),
+                ),
+                Padding(
+                    padding: EdgeInsets.only(top: 15.0, bottom: 15.0),
+                    child: TextField(
+                      controller: descriptionController,
+                      style: textStyle,
+                      decoration: InputDecoration(
+                        labelText: "Description",
+                        labelStyle: textStyle,
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                    )),
+                ListTile(
+                    title: DropdownButton<String>(
+                  items: _priorities.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                  style: textStyle,
+                  value: "Low",
+                  onChanged: null,
+                )),
+              ],
+            )
           ],
-        )));
+        ),
+      ),
+    );
   }
 }
 //         body: Padding(
-          // padding: EdgeInsets.only(top:35.0, left: 10.0, right:10.0),
-          // child:Column(
-          // children: <Widget>[
-          //   TextField(
-          //     controller: titleController,
-          //     style: textStyle,
-          //     decoration: InputDecoration(
-          //         labelText: "Title",
-          //         labelStyle: textStyle,
-          //         border: OutlineInputBorder(
-          //           borderRadius: BorderRadius.circular(5.0),
-          //         ),
-          //         ),
-          //   ),
-            // Padding(
-            //   padding: EdgeInsets.only(top:15.0, bottom: 15.0),
-            //   child:TextField(
-            //   controller: descriptionController,
-            //   style: textStyle,
-            //   decoration: InputDecoration(
-            //       labelText: "Description",
-            //       labelStyle: textStyle,
-            //       border: OutlineInputBorder(
-            //         borderRadius: BorderRadius.circular(5.0),
-            //       ),
-            //       ),
-            // )),
+// padding: EdgeInsets.only(top:35.0, left: 10.0, right:10.0),
+// child:Column(
+// children: <Widget>[
+//   TextField(
+//     controller: titleController,
+//     style: textStyle,
+//     decoration: InputDecoration(
+//         labelText: "Title",
+//         labelStyle: textStyle,
+//         border: OutlineInputBorder(
+//           borderRadius: BorderRadius.circular(5.0),
+//         ),
+//         ),
+//   ),
+// Padding(
+//   padding: EdgeInsets.only(top:15.0, bottom: 15.0),
+//   child:TextField(
+//   controller: descriptionController,
+//   style: textStyle,
+//   decoration: InputDecoration(
+//       labelText: "Description",
+//       labelStyle: textStyle,
+//       border: OutlineInputBorder(
+//         borderRadius: BorderRadius.circular(5.0),
+//       ),
+//       ),
+// )),
